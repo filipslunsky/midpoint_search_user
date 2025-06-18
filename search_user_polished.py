@@ -1,8 +1,10 @@
+# This script takes most functions from search_user_raw.py and displays the results in more structured form
 import requests
 import json
 from search_user_raw import load_env_variables, get_user_input, create_search_payload
 
 def make_post_request(search_payload, api_url, username, password):
+    '''returns None, makes API request, prints response statuses, in case of success (2OO), prints the full response in cleaned form'''
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json"    

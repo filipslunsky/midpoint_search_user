@@ -1,9 +1,11 @@
+# This script is a basic version of user search based on starting letters of name or email, it prints the search results in raw JSON without mods
 import os
 from dotenv import load_dotenv
 import requests
 import json
 
 def load_env_variables():
+    '''loads env variables and returns a tuple (API_URL, USERNAME, PASSWORD)'''
     load_dotenv()
 
     API_URL = os.getenv("API_URL")
@@ -17,6 +19,7 @@ def load_env_variables():
 
 
 def get_user_input():
+    '''prompts user for search input and based on it determins if search is by first letters or email, returns tuple (search_type, user_input)'''
     while True:
         user_input = input("Please enter the user email or beginning letters of the user you are looking for: ").strip()
         if user_input != "":
@@ -28,6 +31,7 @@ def get_user_input():
     return (search_type, user_input)
 
 def create_search_payload(search_type, user_input):
+    '''based on search_type creates and returns a dictionary of dictionaries for search ready to be dumped to JSON'''
     if search_type == "email":
         search_payload = {
             "query": {
@@ -52,6 +56,7 @@ def create_search_payload(search_type, user_input):
     return search_payload
 
 def make_post_request(search_payload, api_url, username, password):
+    '''returns None, makes API request, prints response statuses, in case of success (2OO), prints the full response in raw form'''
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json"    
