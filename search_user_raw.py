@@ -56,7 +56,7 @@ def create_search_payload(search_type, user_input):
     return search_payload
 
 def make_post_request(search_payload, api_url, username, password):
-    '''returns None, makes API request, prints response statuses, in case of success (2OO), prints the full response in raw form'''
+    '''returns None, makes API request, prints response statuses, in case of success (200), prints the full response in raw form'''
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json"    
@@ -83,7 +83,7 @@ def make_post_request(search_payload, api_url, username, password):
             print(response.text)
     
     except Exception as e:
-        print(f"Connection error occured while searching.")
+        print(f"Connection error occurred while searching.")
         print(f"Error: {e}")    
 
 def main():
